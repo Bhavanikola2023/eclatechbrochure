@@ -1578,38 +1578,53 @@
 
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script>
-        // Initialize AOS animations
-        document.addEventListener('DOMContentLoaded', function() {
-            AOS.init({
-                once: true,
-                duration: 1000,
-                easing: 'ease-in-out'
-            });
-            
-            // Form submission handler
-            const form = document.getElementById('enquiryForm');
-            const successMessage = document.getElementById('successMessage');
-            
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    // Here you would normally add your form validation and AJAX submission
-                    // For demo purposes, we'll just show the success message
-                    
-                    // Simulate form processing
-                    setTimeout(function() {
-                        form.classList.add('hidden');
-                        successMessage.classList.remove('hidden');
-                        
-                        // Scroll to success message
-                        successMessage.scrollIntoView({ behavior: 'smooth' });
-                    }, 1000);
-                });
-            }
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1) Initialize AOS animations
+    AOS.init({
+      once: true,
+      duration: 1000,
+      easing: 'ease-in-out'
+    });
+
+    const form = document.getElementById('enquiryForm');
+    const successMessage = document.getElementById('successMessage');
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    if (form) {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+
+        // 2) Disable the button to prevent double‐submits
+        submitButton.disabled = true;
+
+        // 3) POST the form to Netlify
+        fetch('/', {
+          method: 'POST',
+          body: new FormData(form),
+        })
+        .then(response => {
+          if (response.ok) {
+            // 4a) On success, hide the form and reveal the message
+            form.classList.add('hidden');
+            successMessage.classList.remove('hidden');
+            successMessage.setAttribute('aria-live','polite');
+            successMessage.scrollIntoView({ behavior: 'smooth' });
+          } else {
+            // 4b) On a non-200 response, throw to catch()
+            throw new Error(`Server returned ${response.status}`);
+          }
+        })
+        .catch(error => {
+          console.error('Form submission error:', error);
+          submitButton.disabled = false;  // re-enable so user can retry
+          alert('Oops! Something went wrong. Please try again.');
         });
-    </script>
+      });
+    }
+  });
+</script>
+
 
         </div>
         
