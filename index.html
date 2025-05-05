@@ -1252,11 +1252,12 @@
                     
                     <!-- Enquiry Form -->
                     <div class="md:col-span-2" data-aos="fade-left" data-aos-duration="800">
-                         <form 
-  name="speaking-training-enquiry"           
-  method="POST"                              
-  data-netlify="true"                        
-  data-netlify-honeypot="bot-field"           
+                         <form
+  id="enquiryForm"
+  name="speaking-training-enquiry"
+  method="POST"
+  data-netlify="true"
+  data-netlify-honeypot="bot-field"
   class="form-card bg-white rounded-lg shadow-md p-8"
 >
                              <input type="hidden" name="form-name" value="speaking-training-enquiry" />
@@ -1502,21 +1503,22 @@
                         </form>
                         
                         <!-- Success Message (hidden by default) -->
-                        <div id="successMessage" class="hidden bg-emerald-50 border border-emerald-200 rounded-lg p-6 text-center mt-6">
-                            <div class="text-5xl text-emerald-500 mb-4">
-                                <i class="fas fa-check-circle"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-emerald-700 mb-2">Thank You for Your Enquiry!</h3>
-                            <p class="text-gray-700 mb-4">
-                                We've received your information and will contact you within 24 hours to discuss your AI education needs.
-                            </p>
-                            <p class="text-sm text-gray-600">
-                                A confirmation email has been sent to your inbox with a summary of your enquiry.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
+                       <div id="successMessage"
+     class="hidden bg-emerald-50 border border-emerald-200 rounded-lg p-6 text-center mt-6"
+     role="status" aria-live="polite">
+  <div class="text-5xl text-emerald-500 mb-4">
+    <i class="fas fa-check-circle"></i>
+  </div>
+  <h3 class="text-2xl font-bold text-emerald-700 mb-2">
+    Thank You for Your Enquiry!
+  </h3>
+  <p class="text-gray-700 mb-4">
+    We've received your information and will contact you within 24 hours…
+  </p>
+  <p class="text-sm text-gray-600">
+    A confirmation email has been sent to your inbox…
+  </p>
+</div>
                            
                 <!-- FAQ Section -->
                 <div data-aos="fade-up" data-aos-duration="800">
@@ -1577,51 +1579,34 @@
  
 
     <!-- JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script>
+   <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // 1) Initialize AOS animations
-    AOS.init({
-      once: true,
-      duration: 1000,
-      easing: 'ease-in-out'
-    });
+    AOS.init({ once: true, duration: 1000, easing: 'ease-in-out' });
 
     const form = document.getElementById('enquiryForm');
-    const successMessage = document.getElementById('successMessage');
-    const submitButton = form.querySelector('button[type="submit"]');
+    const success = document.getElementById('successMessage');
+    const submitBtn = form.querySelector('button[type="submit"]');
 
-    if (form) {
-      form.addEventListener('submit', e => {
-        e.preventDefault();
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      submitBtn.disabled = true;
 
-        // 2) Disable the button to prevent double‐submits
-        submitButton.disabled = true;
-
-        // 3) POST the form to Netlify
-        fetch('/', {
-          method: 'POST',
-          body: new FormData(form),
-        })
-        .then(response => {
-          if (response.ok) {
-            // 4a) On success, hide the form and reveal the message
-            form.classList.add('hidden');
-            successMessage.classList.remove('hidden');
-            successMessage.setAttribute('aria-live','polite');
-            successMessage.scrollIntoView({ behavior: 'smooth' });
-          } else {
-            // 4b) On a non-200 response, throw to catch()
-            throw new Error(`Server returned ${response.status}`);
-          }
-        })
-        .catch(error => {
-          console.error('Form submission error:', error);
-          submitButton.disabled = false;  // re-enable so user can retry
-          alert('Oops! Something went wrong. Please try again.');
-        });
+      fetch('/', {
+        method: 'POST',
+        body: new FormData(form),
+      })
+      .then(res => {
+        if (!res.ok) throw new Error(`Server returned ${res.status}`);
+        form.classList.add('hidden');
+        success.classList.remove('hidden');
+        success.scrollIntoView({ behavior: 'smooth' });
+      })
+      .catch(err => {
+        console.error('Form error:', err);
+        submitBtn.disabled = false;
+        alert('Submission failed—please try again.');
       });
-    }
+    });
   });
 </script>
 
