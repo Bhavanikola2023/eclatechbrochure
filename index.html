@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eclatech Solutions - Interactive AI Education</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #10B981;
+            --primary-dark: #059669;
+            --secondary: #0D9488;
+            --secondary-dark: #0F766E;
+            --dark: #0f172a;
+            --dark-mid: #1e293b;
+            --light: #f8fafc;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-mid) 100%);
+            position: relative;
+        }
+        
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(16, 185, 129, 0.2) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(13, 148, 136, 0.2) 0%, transparent 25%);
+            z-index: 1;
+        }
+        
+        .tech-pattern {
+            background-image: 
+                radial-gradient(rgba(16, 185, 129, 0.1) 2px, transparent 2px),
+                radial-gradient(rgba(13, 148, 136, 0.1) 2px, transparent 2px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+        }
+        
+        .accent-gradient {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+        
+        .methodology-step {
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .methodology-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .methodology-step:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: -15px;
+            width: 30px;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .methodology-step:not(:last-child):hover::after {
+            width: 40px;
+        }
+        
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .topic-pill {
+            background: linear-gradient(90deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .topic-pill:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .audience-card {
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .audience-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-left-width: 6px;
+        }
+        
+        .roadmap-step {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .roadmap-step:hover {
+            transform: translateX(5px);
+        }
+        
+        .roadmap-step::before {
+            content: "";
+            position: absolute;
+            left: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .roadmap-step:hover::before {
+            transform: translateY(-50%) scale(1.2);
+            box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.2);
+        }
+        
+        .roadmap-line {
+            position: absolute;
+            left: -18px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary);
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translatey(0px);
+            }
+            50% {
+                transform: translatey(-10px);
+            }
+            100% {
+                transform: translatey(0px);
+            }
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+            transition: left 0.8s ease;
+        }
+        
+        .btn-primary:hover::after {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 10px 15px -3px rgba(5, 150, 105, 0.3), 0 4px 6px -2px rgba(5, 150, 105, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .value-card {
+            transition: all 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .value-card:hover .icon-wrapper {
+            transform: rotateY(180deg);
+        }
+        
+        .icon-wrapper {
+            transition: transform 0.6s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .testimonial-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px) rotate(1deg);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .testimonial-card.active .testimonial-content {
+            max-height: 300px;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(13, 148, 136, 0.8) 0%, rgba(16, 185, 129, 0.8) 100%);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+        
+        .glow-effect {
+            position: relative;
+        }
+        
+        .glow-effect::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border-radius: inherit;
+            box-shadow: 0 0 15px 3px rgba(16, 185, 129, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .glow-effect:hover::after {
+            opacity: 1;
+        }
+        
+        /* For continuous single page PDF */
+        .pdf-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Responsive design improvements */
+        @media (max-width: 768px) {
+            .methodology-step:not(:last-child)::after {
+                display: none;
+            }
+        }
+        
+        /* Tab Navigation Styles */
+        .nav-container {
+            background-color: var(--dark);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        
+        .nav-tab {
+            position: relative;
+            padding: 1rem 1.5rem;
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .nav-tab:hover {
+            color: var(--primary);
+        }
+        
+        .nav-tab.active {
+            color: var(--primary);
+        }
+        
+        .nav-tab.active:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            width: 60%;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px 3px 0 0;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .tab-indicator {
+            position: absolute;
+            bottom: 0;
+            height: 3px;
+            border-radius: 3px 3px 0 0;
+            background: var(--primary);
+            transition: all 0.4s ease;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            color: white;
+            padding: 0.5rem 0;
+        }
+        
+        .logo-container h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .logo-container p {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header & Navigation -->
+    <header class="gradient-bg">
+        <div class="container mx-auto px-6">
+            <div class="logo-container py-4">
+                <div>
+                    <h1 class="text-3xl font-bold">Eclatech Solutions</h1>
+                    <p>AI Learning for All</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="nav-container">
+        <div class="container mx-auto px-6">
+            <nav class="flex overflow-x-auto py-2">
+                <a href="#home" class="nav-tab active" data-tab="home">Home</a>
+                <a href="#signature-topics" class="nav-tab" data-tab="signature-topics">Signature Topics</a>
+                <a href="#target-audiences" class="nav-tab" data-tab="target-audiences">Target Audiences</a>
+                <a href="#engagement-roadmap" class="nav-tab" data-tab="engagement-roadmap">Engagement Roadmap</a>
+                <a href="#roi-calculator" class="nav-tab" data-tab="roi-calculator">ROI Calculator</a>
+                <a href="#enquiry-form" class="nav-tab" data-tab="enquiry-form">Enquiry Form</a>
+                <span class="tab-indicator"></span>
+            </nav>
+        </div>
+    </div>
+    
+    <div class="pdf-container">
+        <!-- Home Tab Content -->
+        <div id="home" class="tab-content active">
+            <!-- Cover Section -->
+            <section class="gradient-bg text-white py-16 relative overflow-hidden">
+                <div class="absolute inset-0 tech-pattern opacity-20"></div>
+                
+                <div class="container mx-auto px-6 relative z-10">
+                    <div class="flex flex-col md:flex-row items-center justify-between">
+                        <div class="mb-10 md:mb-0" data-aos="fade-up" data-aos-duration="1000">
+                            <h1 class="text-4xl md:text-6xl font-bold mb-4 animate__animated animate__fadeInUp animate__delay-1s">
+                                Empower Your AI Journey with Eclatech
+                            </h1>
+                            <p class="text-xl md:text-2xl mb-8 animate__animated animate__fadeInUp animate__delay-1s">
+                                AI Learning for All
+                            </p>
+                            <div class="animate__animated animate__fadeInUp animate__delay-2s">
+                                <button class="btn-primary text-white px-6 py-3 rounded-full inline-block font-semibold hover:bg-emerald-600 transition">
+                                    Book Now!
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="w-full md:w-2/5 floating" data-aos="zoom-in" data-aos-duration="1200">
+                            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-lg">
+                                <div class="qr-placeholder bg-white h-48 w-48 mx-auto rounded-lg flex items-center justify-center">
+                                    <span class="text-gray-400 text-center">Scan to contact<br>Eclatech</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Animated Tech Elements -->
+                    <div class="absolute -bottom-10 left-0 right-0 opacity-30 h-40 bg-gradient-to-t from-transparent to-teal-900"></div>
+                </div>
+            </section>
+
+            <!-- Mission/Vision Section -->
+            <section class="py-16 bg-white">
+                <div class="container mx-auto px-6">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="w-full md:w-1/2 mb-10 md:mb-0" data-aos="fade-right" data-aos-duration="1000">
+                            <h2 class="text-3xl font-bold mb-4">Our Mission</h2>
+                            <div class="h-1 w-20 accent-gradient rounded mb-6"></div>
+                            <p class="text-lg mb-6 leading-relaxed">
+                                Closing the AI Gap: Equipping You with Knowledge and Tools to Harness Artificial Intelligence. 
+                                Committed to Spreading AI Literacy, Fostering Innovation, and Ensuring Accessible, 
+                                Ethical, and Transformative AI Technologies.
+                            </p>
+                            <div class="bg-gray-100 border-l-4 border-emerald-500 pl-4 py-4 italic transform transition-transform hover:scale-105">
+                                "Our vision is a world where everyone has the knowledge and skills to leverage AI 
+                                as a powerful tool for innovation, problem-solving, and positive impact."
+                                <div class="mt-2 text-sm font-medium">- Eclatech Founder</div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/2 md:pl-10" data-aos="fade-left" data-aos-duration="1000">
+                            <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                                <h3 class="text-xl font-bold mb-4 text-emerald-700">Our Vision</h3>
+                                <p class="mb-4">
+                                    We envision a future where AI literacy is universal, where organizations and individuals 
+                                    confidently navigate the AI landscape with ethical awareness and practical skills.
+                                </p>
+                                <p>
+                                    Through education, hands-on training, and strategic guidance, we aim to bridge the 
+                                    technological divide and empower diverse communities to thrive in an AI-enhanced world.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Value Props Section -->
+            <section class="py-16 bg-gray-50">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-3xl font-bold text-center mb-4" data-aos="fade-up" data-aos-duration="800">Why Choose Eclatech?</h2>
+                    <div class="h-1 w-20 accent-gradient rounded mx-auto mb-12" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="300"></div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="value-card bg-white rounded-lg shadow-md p-8 border-t-4 border-emerald-500 hover:shadow-xl transition-all duration-300" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="150">
+                            <div class="icon-wrapper text-emerald-500 text-3xl mb-4 bg-emerald-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-center">Expertise & Methodology</h3>
+                            <p class="text-center">
+                                Our proven methodology combines technical knowledge with accessibility, 
+                                ensuring participants at all levels gain practical AI skills through 
+                                hands-on learning and real-world applications.
+                            </p>
+                        </div>
+                        
+                        <div class="value-card bg-white rounded-lg shadow-md p-8 border-t-4 border-emerald-500 hover:shadow-xl transition-all duration-300" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="300">
+                            <div class="icon-wrapper text-emerald-500 text-3xl mb-4 bg-emerald-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-center">Audience-Specific Approach</h3>
+                            <p class="text-center">
+                                We tailor our training to your specific context, needs, and objectives, 
+                                delivering customized content that resonates with your audience and addresses 
+                                your unique challenges.
+                            </p>
+                        </div>
+                        
+                        <div class="value-card bg-white rounded-lg shadow-md p-8 border-t-4 border-emerald-500 hover:shadow-xl transition-all duration-300" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="450">
+                            <div class="icon-wrapper text-emerald-500 text-3xl mb-4 bg-emerald-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-center">Ethical Foundation</h3>
+                            <p class="text-center">
+                                Our approach integrates ethical considerations at every stage, 
+                                ensuring responsible AI adoption with emphasis on bias awareness, 
+                                privacy protection, and sustainable practices.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+ <!-- Founder Bio Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="w-full md:w-1/3 mb-8 md:mb-0" data-aos="fade-right" data-aos-duration="1000">
+                        <div class="bg-gray-200 h-72 w-72 mx-auto rounded-full overflow-hidden flex items-center justify-center border-4 border-white shadow-lg">
+                            <span class="text-gray-400">Founder Photo</span>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full md:w-2/3 md:pl-12" data-aos="fade-left" data-aos-duration="1000">
+                        <h2 class="text-3xl font-bold mb-4 text-emerald-700">About Our Founder</h2>
+                        <div class="h-1 w-20 accent-gradient rounded mb-6"></div>
+                        
+                        <p class="mb-6 leading-relaxed">
+                            Our founder combines extensive expertise in AI education with a passion for making 
+                            technology accessible to all. With over a decade of experience in higher education and 
+                            a background spanning technology integration, instructional design, and AI implementation, 
+                            they bring a unique perspective to AI literacy.
+                        </p>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow-md mb-6 transform transition-all duration-300 hover:shadow-xl" data-aos="fade-up" data-aos-duration="800">
+                            <h3 class="text-xl font-semibold mb-4 text-emerald-700">Credentials & Expertise</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="transform transition-all duration-300 hover:translate-x-2">
+                                    <h4 class="font-medium text-emerald-700 mb-2">Education</h4>
+                                    <ul class="text-gray-600 space-y-1">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-graduation-cap text-emerald-500 mr-2 mt-1"></i>
+                                            <span>M.A in Mathematics</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-graduation-cap text-emerald-500 mr-2 mt-1"></i>
+                                            <span>M.S. in Electrical Engineering</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="transform transition-all duration-300 hover:translate-x-2">
+                                    <h4 class="font-medium text-emerald-700 mb-2">Experience</h4>
+                                    <ul class="text-gray-600 space-y-1">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-briefcase text-emerald-500 mr-2 mt-1"></i>
+                                            <span>25+ years in higher education</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-briefcase text-emerald-500 mr-2 mt-1"></i>
+                                            <span>CEO & Founder of Eclatech Solutions</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="transform transition-all duration-300 hover:translate-x-2">
+                                    <h4 class="font-medium text-emerald-700 mb-2">Certifications</h4>
+                                    <ul class="text-gray-600 space-y-1">
+ <li class="flex items-start">
+    <i class="fas fa-certificate text-emerald-500 mr-2 mt-1"></i>
+    <span>MIT, Stanford</span>
+</li>
+<li class="flex items-start">
+    <i class="fas fa-certificate text-emerald-500 mr-2 mt-1"></i>
+    <span>AWS, NVIDIA</span>
+</li>
+
+
+                                    </ul>
+                                </div>
+                                
+                                <div class="transform transition-all duration-300 hover:translate-x-2">
+                                    <h4 class="font-medium text-emerald-700 mb-2">Speaking</h4>
+                                    <ul class="text-gray-600 space-y-1">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-microphone text-emerald-500 mr-2 mt-1"></i>
+                                            <span>Dynamic AI Keynote Speaker</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-microphone text-emerald-500 mr-2 mt-1"></i>
+                                            <span>Empowering AI Trainer</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="italic text-lg border-l-4 border-emerald-500 pl-4 py-2 bg-white shadow-sm transform transition-all duration-300 hover:scale-105">
+                            "My mission is to demystify AI and make it accessible to everyone, regardless of technical background. 
+                            When we empower people with AI literacy, we unlock tremendous potential for innovation and positive change."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <!-- CTA Section -->
+        <section class="py-16 bg-gradient-to-r from-emerald-700 to-teal-700 text-bg-gray-50 relative overflow-hidden">
+            <div class="absolute inset-0 tech-pattern opacity-10"></div>
+            
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 animate__animated animate__fadeIn" data-aos="fade-up" data-aos-duration="800">Ready to Transform Your AI Journey?</h2>
+                <p class="text-xl mb-8 max-w-3xl mx-auto" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                    Take the first step toward empowering your organization, team, or community with practical AI skills 
+                    and knowledge. Contact us today to schedule your discovery consultation.
+                </p>
+                
+                <div class="mb-12" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="400">
+                    <a class="btn-primary bg-white text-emerald-700 px-8 py-4 rounded-full text-lg font-bold inline-block hover:bg-gray-100 transition shadow-lg pulse">
+                        Book Your Consultation
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                    <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300 hover:scale-105" data-aos="fade-up" data-aos-duration="800" data-aos-delay="150">
+                        <div class="text-3xl mb-4">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Email Us</h3>
+                        <p class="opacity-90 mb-4">For inquiries and detailed information</p>
+                        <a href="mailto:bhavanikola@gmail.com" class="text-bg-gray-50 font-medium underline hover:text-emerald-100 transition">contact@eclatechusa.com</a>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300 hover:scale-105" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                        <div class="text-3xl mb-4">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Call Us</h3>
+                        <p class="opacity-90 mb-4">Speak with our team directly</p>
+                        <a  class="text-bg-gray-50 font-medium ">(682) 306-4268</a>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300 hover:scale-105" data-aos="fade-up" data-aos-duration="800" data-aos-delay="450">
+                        <div class="text-3xl mb-4">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Schedule Online</h3>
+                        <p class="opacity-90 mb-4">Book a meeting at your convenience</p>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-emerald-800 to-transparent"></div>
+        </section>
+
+        <!-- Accessibility & Ethics Notice -->
+        <section class="py-12 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-2xl font-bold mb-6 text-center text-emerald-700" data-aos="fade-up" data-aos-duration="800">Our Commitment to Accessibility & Ethical AI</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-white p-6 rounded-lg shadow-md transform transition-all duration-300 hover:shadow-lg hover:-translate-y-1" data-aos="fade-right" data-aos-duration="800" data-aos-delay="150">
+                            <div class="text-emerald-600 text-3xl mb-4">
+                                <i class="fas fa-universal-access"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Accessibility Commitment</h3>
+                            <p class="text-gray-700">
+                                Eclatech is committed to making AI education accessible to everyone. Our materials 
+                                and workshops are designed with accessibility in mind, and we are happy to provide 
+                                accommodations to ensure all participants can fully engage with our content.
+                            </p>
+                            <p class="text-gray-700 mt-4">
+                                If you require specific accommodations or have accessibility needs, please let us 
+                                know when booking your session.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow-md transform transition-all duration-300 hover:shadow-lg hover:-translate-y-1" data-aos="fade-left" data-aos-duration="800" data-aos-delay="300">
+                            <div class="text-emerald-600 text-3xl mb-4">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Ethical AI Pledge</h3>
+                            <p class="text-gray-700">
+                                We believe AI should be developed and used responsibly, with careful consideration 
+                                of its impacts on individuals and society. All our training programs integrate 
+                                ethical considerations as a fundamental component.
+                            </p>
+                            <p class="text-gray-700 mt-4">
+                                Eclatech is committed to promoting awareness of AI bias, privacy concerns, 
+                                transparency issues, and sustainability in all our educational offerings.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </div>
+        
+        <!-- Signature Topics Tab Content -->
+        <div id="signature-topics" class="tab-content">
+            <section class="py-16 bg-white">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-3xl font-bold text-center mb-4" data-aos="fade-up" data-aos-duration="800">Signature Topics & Outcomes</h2>
+                    <div class="h-1 w-20 accent-gradient rounded mx-auto mb-12" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="300"></div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-gray-50 rounded-lg shadow-md p-8 transform transition-all duration-300 hover:shadow-lg hover:bg-gray-100" data-aos="fade-up" data-aos-duration="800" data-aos-delay="150">
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="topic-pill text-white text-xs px-3 py-1 rounded-full">AI Fundamentals</span>
+                                <span class="topic-pill text-white text-xs px-3 py-1 rounded-full">Prompt Engineering</span>
+                                <span class="topic-pill text-white text-xs px-3 py-1 rounded-full">Ethics</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-4 text-emerald-700">AI Literacy for Educators</h3>
+                            <p class="mb-4 text-gray-700">
+                                Empowering education professionals with AI tools and strategies that enhance teaching 
+                                effectiveness and student engagement.
+                            </p>
+                            <h4 class="font-semibold mb-2">Participant Outcomes:</h4>
+                            <ul class="text-gray-600 space-y-2 pl-5 list-disc">
+                                <li class="hover:text-emerald-600 transition-colors duration-300">Create differentiated learning materials in minutes</li>
+                                <li class="hover:text-emerald-600 transition-colors duration-300">Develop AI-enhanced student feedback systems</li>
+                                <li class="hover:text-emerald-600 transition-colors duration-300">Implement ethical guidelines for classroom AI use</li>
+                                <li class="hover:text-emerald-600 transition-colors duration-300">Design engaging, AI-supported curriculum content</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg shadow-md p-8 transform transition-all duration-300 hover:shadow-lg hover:bg-gray-100" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="topic-pill text-white text-xs px-3 py-1 rounded-full">Data Analysis</span>
+                                <span class="topic-pill text-white text-xs px-3 py-1 rounded-full">Vision AI</span>
+                                <span class="topic-pill text-white text-xs px-3 py-1 rounded-full">Integration</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-4 text-emerald-700">AI for Organizational Efficiency</h3>
+                            <p class="mb-4 text-gray-700">
+                                Transforming operations through strategic AI implementation that reduces costs 
+                                and improves decision-making.
+                            </p>
+                            <h4 class="font-semibold mb-2">Participant Outcomes:</h4>
+                            <ul class="text-gray-600 space-y-2 pl-5 list-disc">
+                                <li class="hover:text-emerald-600 transition-colors duration-300">Automate routine processes and communications</li>
+                                <li class="hover:text-emerald-600 transition-colors duration-300">Extract actionable insights from complex data</li>
+                                <li class="hover:text-emerald-600 transition-colors duration-300">Implement AI-enhanced customer service solutions</li>
+                                <li class="hover:text-emerald-600 transition-colors duration-300">Develop strategic frameworks for AI integration</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg shadow-md p-8 transform transition-all duration-300 hover:shadow-lg hover:bg-gray-100" data-aos="fade-up" data-aos-duration="800" data-aos-delay="450">
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="topic-pill text-white text-xs px-3 py-1 rounded-full">Resource Optimization</span>
+                                <span class="topic-pill text-white text-xs px-3 py-1 rounded-full">Audience Engagement</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-4 text-emerald-700">AI for Non-Profits</h3>
+                            <p class="mb-4 text-gray-700">
+                                Helping mission-driven organizations maximize impact through cost-effective 
+                                AI solutions and donor engagement strategies.
+                            </p>
+                            <h4 class="font-semibold mb-2">Participant Outcomes:</h4>
+                            <ul class="text-gray-600 space-y-2 pl-5 list-disc">
+                                <li class="hover:text-emerald-600 transition-colors duration-300">Create compelling grant proposals and outreach material</li>
+                                <li class="hover:text-emerald-600 transition-colors duration-300">Improve donor management and relationship building</li>
+                                <li class="hover:text-emerald-600 transition-colors duration-300">Enhance community engagement through AI-powered tools</li>
+                                <li class="hover:text-emerald-600 transition-colors duration-300">Develop impact measurement systems</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg shadow-md p-8 transform transition-all duration-300 hover:shadow-lg hover:bg-gray-100" data-aos="fade-up" data-aos-duration="800" data-aos-delay="600">
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="topic-pill text-white text-xs px-3 py-1 rounded-full">Creativity</span>
+                                <span class="topic-pill text-white text-xs px-3 py-1 rounded-full">Practical Applications</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-4 text-emerald-700">AI for Everyday Life</h3>
+                            <p class="mb-4 text-gray-700">
+                                Introducing families and individuals to practical AI applications that enhance 
+                                daily life, learning, and creative expression.
+                            </p>
+                            <h4 class="font-semibold mb-2">Participant Outcomes:</h4>
+                            <ul class="text-gray-600 space-y-2 pl-5 list-disc">
+                                <li class="hover:text-emerald-600 transition-colors duration-300">Utilize AI tools for personal productivity and organization</li>
+                                <li class="hover:text-emerald-600 transition-colors duration-300">Create personalized learning experiences for all ages</li>
+                                <li class="hover:text-emerald-600 transition-colors duration-300">Explore creative applications for family projects</li>
+                                <li class="hover:text-emerald-600 transition-colors duration-300">Implement safety practices for responsible AI use</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials Section -->
+            <section class="py-16 bg-gray-100">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-3xl font-bold text-center mb-4" data-aos="fade-up" data-aos-duration="800">What Our Clients Say</h2>
+                    <div class="h-1 w-20 accent-gradient rounded mx-auto mb-12" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="300"></div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                        <div class="testimonial-card bg-white rounded-lg shadow-md p-6" data-aos="fade-up" data-aos-duration="800" data-aos-delay="150">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 mr-4">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold">Jordan Smith</h3>
+                                    <p class="text-sm text-gray-600">University Professor</p>
+                                </div>
+                            </div>
+                            <p class="italic mb-2">"Transformative experience in AI education and speaking engagements. Highly recommended!"</p>
+                            <div class="testimonial-content">
+                                <p class="text-gray-700 mt-4">
+                                    The workshops completely changed how our faculty approaches AI in education. 
+                                    The practical, hands-on nature of the training made complex concepts accessible 
+                                    to everyone, regardless of their technical background. We've seen a 40% increase 
+                                    in AI tool adoption among our teaching staff since the training.
+                                </p>
+                            </div>
+                            <button class="text-emerald-600 text-sm mt-2 flex items-center read-more">
+                                <span>Read more</span>
+                                <i class="fas fa-chevron-down ml-1 transform transition-transform duration-300"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="testimonial-card bg-white rounded-lg shadow-md p-6" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 mr-4">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold">Alex Johnson</h3>
+                                    <p class="text-sm text-gray-600">Non-Profit Director</p>
+                                </div>
+                            </div>
+                            <p class="italic mb-2">"The workshops were enlightening and truly empowered our team to embrace AI."</p>
+                            <div class="testimonial-content">
+                                <p class="text-gray-700 mt-4">
+                                    As a small non-profit with limited resources, we were skeptical about how AI could 
+                                    help us. Eclatech's training was eye-opening. They tailored everything to our specific 
+                                    needs and showed us practical ways to stretch our budget and increase our impact. 
+                                    Our grant writing process is now twice as efficient, and our donor communications 
+                                    have never been more effective.
+                                </p>
+                            </div>
+                            <button class="text-emerald-600 text-sm mt-2 flex items-center read-more">
+                                <span>Read more</span>
+                                <i class="fas fa-chevron-down ml-1 transform transition-transform duration-300"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Target Audiences Tab Content -->
+        <div id="target-audiences" class="tab-content">
+            <section class="py-16 bg-white">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-3xl font-bold text-center mb-4" data-aos="fade-up" data-aos-duration="800">Target Audiences & Outcomes</h2>
+                    <div class="h-1 w-20 accent-gradient rounded mx-auto mb-12" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="300"></div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="audience-card bg-white p-6 rounded-lg shadow-md" data-aos="fade-right" data-aos-duration="800" data-aos-delay="150">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 mr-4 transform transition-transform duration-500 hover:rotate-12">
+                                    <i class="fas fa-university"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-emerald-700">Higher Education</h3>
+                            </div>
+                            <p class="mb-4 text-gray-700">
+                                Faculty, administrators, and researchers seeking to integrate AI into 
+                                teaching, research, and administrative processes.
+                            </p>
+                            <div class="bg-gray-50 p-4 rounded hover:shadow-md transition-shadow duration-300">
+                                <h4 class="font-semibold mb-2 text-emerald-700">Key Outcomes:</h4>
+                                <ul class="text-gray-600 space-y-1">
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-arrow-right text-emerald-500 mr-2 mt-1"></i>
+                                        <span>40% reduction in administrative workload</span>
+                                    </li>
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-arrow-right text-emerald-500 mr-2 mt-1"></i>
+                                        <span>Enhanced research capabilities and data analysis</span>
+                                    </li>
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-arrow-right text-emerald-500 mr-2 mt-1"></i>
+                                        <span>Improved student engagement and personalized learning</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="audience-card bg-white p-6 rounded-lg shadow-md" data-aos="fade-left" data-aos-duration="800" data-aos-delay="300">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 mr-4 transform transition-transform duration-500 hover:rotate-12">
+                                    <i class="fas fa-chalkboard"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-emerald-700">K-12 Education</h3>
+                            </div>
+                            <p class="mb-4 text-gray-700">
+                                Teachers, administrators, and curriculum designers looking to enhance 
+                                educational experiences and operational efficiency.
+                            </p>
+                            <div class="bg-gray-50 p-4 rounded hover:shadow-md transition-shadow duration-300">
+                                <h4 class="font-semibold mb-2 text-emerald-700">Key Outcomes:</h4>
+                                <ul class="text-gray-600 space-y-1">
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-arrow-right text-emerald-500 mr-2 mt-1"></i>
+                                        <span>Time-saving content creation techniques</span>
+                                    </li>
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-arrow-right text-emerald-500 mr-2 mt-1"></i>
+                                        <span>Differentiated instruction for diverse learners</span>
+                                    </li>
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-arrow-right text-emerald-500 mr-2 mt-1"></i>
+                                        <span>Responsible AI literacy for students</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="audience-card bg-white p-6 rounded-lg shadow-md" data-aos="fade-right" data-aos-duration="800" data-aos-delay="450">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 mr-4 transform transition-transform duration-500 hover:rotate-12">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-emerald-700">Business & Organizations</h3>
+                            </div>
+                            <p class="mb-4 text-gray-700">
+                                Leaders, teams, and professionals seeking competitive advantage through 
+                                strategic AI implementation and workforce development.
+                            </p>
+                            <div class="bg-gray-50 p-4 rounded hover:shadow-md transition-shadow duration-300">
+                                <h4 class="font-semibold mb-2 text-emerald-700">Key Outcomes:</h4>
+                                <ul class="text-gray-600 space-y-1">
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-arrow-right text-emerald-500 mr-2 mt-1"></i>
+                                        <span>Data-driven decision making capabilities</span>
+                                    </li>
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-arrow-right text-emerald-500 mr-2 mt-1"></i>
+                                        <span>Streamlined operations and cost reduction</span>
+                                    </li>
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-arrow-right text-emerald-500 mr-2 mt-1"></i>
+                                        <span>Enhanced customer engagement strategies</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="audience-card bg-white p-6 rounded-lg shadow-md" data-aos="fade-left" data-aos-duration="800" data-aos-delay="600">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 mr-4 transform transition-transform duration-500 hover:rotate-12">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-emerald-700">Non-Profits & Communities</h3>
+                            </div>
+                            <p class="mb-4 text-gray-700">
+                                Mission-driven organizations and community leaders looking to extend impact 
+                                through resource optimization and enhanced outreach.
+                            </p>
+                            <div class="bg-gray-50 p-4 rounded hover:shadow-md transition-shadow duration-300">
+                                <h4 class="font-semibold mb-2 text-emerald-700">Key Outcomes:</h4>
+                                <ul class="text-gray-600 space-y-1">
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-arrow-right text-emerald-500 mr-2 mt-1"></i>
+                                        <span>More effective donor and volunteer engagement</span>
+                                    </li>
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-arrow-right text-emerald-500 mr-2 mt-1"></i>
+                                        <span>Grant writing and fundraising enhancements</span>
+                                    </li>
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-arrow-right text-emerald-500 mr-2 mt-1"></i>
+                                        <span>Improved service delivery to constituents</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Engagement Roadmap Tab Content -->
+        <div id="engagement-roadmap" class="tab-content">
+            <section class="py-16 bg-white">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-3xl font-bold text-center mb-4" data-aos="fade-up" data-aos-duration="800">Engagement Roadmap</h2>
+                    <div class="h-1 w-20 accent-gradient rounded mx-auto mb-12" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="300"></div>
+                    
+                    <div class="max-w-4xl mx-auto relative">
+                        <div class="absolute roadmap-line left-4 top-0 h-full"></div>
+                        
+                        <div class="roadmap-step pl-12 mb-10 relative" data-aos="fade-up" data-aos-duration="800" data-aos-delay="150">
+                            <h3 class="text-xl font-bold mb-3 text-emerald-700">1. Discovery Consultation</h3>
+                            <p class="text-gray-700 mb-4">
+                                We begin with a comprehensive needs assessment to understand your goals, 
+                                audience, and existing AI knowledge. This conversation helps us tailor 
+                                our approach to your specific requirements.
+                            </p>
+                            <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                                <h4 class="font-semibold mb-2 text-emerald-700">What to expect:</h4>
+                                <ul class="text-gray-600 space-y-1">
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                        <span>30-minute initial consultation</span>
+                                    </li>
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                        <span>Needs assessment questionnaire</span>
+                                    </li>
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                        <span>Preliminary recommendations</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="roadmap-step pl-12 mb-10 relative" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                            <h3 class="text-xl font-bold mb-3 text-emerald-700">2. Customized Proposal</h3>
+                            <p class="text-gray-700 mb-4">
+                                Based on our discovery session, we develop a tailored proposal outlining 
+                                workshop content, delivery methods, timeline, and expected outcomes 
+                                specifically designed for your objectives.
+                            </p>
+                            <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                                <h4 class="font-semibold mb-2 text-emerald-700">What to expect:</h4>
+                                <ul class="text-gray-600 space-y-1">
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                        <span>Detailed session outline</span>
+                                    </li>
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                        <span>Timeline and logistics planning</span>
+                                    </li>
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                        <span>Investment details and options</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="roadmap-step pl-12 mb-10 relative" data-aos="fade-up" data-aos-duration="800" data-aos-delay="450">
+                            <h3 class="text-xl font-bold mb-3 text-emerald-700">3. Delivery & Implementation</h3>
+                            <p class="text-gray-700 mb-4">
+                                We deliver the workshops or training sessions using our proven methodology, 
+                                ensuring engagement, hands-on practice, and practical application specific 
+                                to your context.
+                            </p>
+                            <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                                <h4 class="font-semibold mb-2 text-emerald-700">What to expect:</h4>
+                                <ul class="text-gray-600 space-y-1">
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                        <span>Engaging, interactive sessions</span>
+                                    </li>
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                        <span>Customized demonstrations and examples</span>
+                                    </li>
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                        <span>Comprehensive resource package</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="roadmap-step pl-12 relative" data-aos="fade-up" data-aos-duration="800" data-aos-delay="600">
+                            <h3 class="text-xl font-bold mb-3 text-emerald-700">4. Follow-up & Support</h3>
+                            <p class="text-gray-700 mb-4">
+                                Our relationship continues after the initial sessions with ongoing support, 
+                                additional resources, and check-ins to ensure successful implementation 
+                                and address emerging questions.
+                            </p>
+                            <div class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                                <h4 class="font-semibold mb-2 text-emerald-700">What to expect:</h4>
+                                <ul class="text-gray-600 space-y-1">
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                        <span>30-day follow-up consultation</span>
+                                    </li>
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                        <span>Access to resource portal</span>
+                                    </li>
+                                    <li class="flex items-start transform transition-all duration-300 hover:translate-x-2">
+                                        <i class="fas fa-check-circle text-emerald-500 mr-2"></i>
+                                        <span>Implementation guidance and support</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- ROI Calculator Tab Content -->
+        <div id="roi-calculator" class="tab-content">
+            <section class="py-16 bg-gray-50">
+                <div class="container mx-auto px-6 max-w-2xl">
+                    <div class="mb-8 text-center" data-aos="fade-up" data-aos-duration="800">
+                        <h2 class="text-3xl font-bold mb-4">Calculate Your Training ROI</h2>
+                        <div class="h-1 w-20 accent-gradient rounded mx-auto mb-6"></div>
+                        <p class="text-lg text-gray-700">
+                            Investing in AI workflow optimization delivers measurable results: reclaim your team's time, boost morale, and drive bottom-line impact. Use the calculator below to see how quickly your investment pays for itself and starts delivering long-term efficiency gains.
+                        </p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                        <div class="grid grid-cols-1 gap-4">
+                            <div>
+                                <label class="block text-gray-700">Hours saved per week</label>
+                                <input type="number" id="hoursSaved" class="w-full mt-1 p-2 border border-gray-300 rounded" placeholder="e.g., 5">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700">Hourly cost of your time ($)</label>
+                                <input type="number" id="hourlyRate" class="w-full mt-1 p-2 border border-gray-300 rounded" placeholder="e.g., 75">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700">Efficiency boost (%)</label>
+                                <select id="efficiencyBoost" class="w-full mt-1 p-2 border border-gray-300 rounded">
+                                    <option value="10">10%</option>
+                                    <option value="20" selected>20%</option>
+                                    <option value="30">30%</option>
+                                    <option value="40">40%</option>
+                                    <option value="50">50%</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700">Estimated training investment ($)</label>
+                                <input type="number" id="trainingInvestment" class="w-full mt-1 p-2 border border-gray-300 rounded" placeholder="e.g., 10000">
+                            </div>
+                            <div class="text-center">
+                                <button id="calculateROI" class="btn-primary text-white px-6 py-2 rounded font-semibold mt-2">Calculate ROI</button>
+                            </div>
+                            <div id="roiResults" class="mt-6 hidden bg-white p-4 rounded border border-gray-200">
+                                <h3 class="text-xl font-bold mb-2 text-gray-800">Your Results:</h3>
+                                <p id="weeklySavings" class="text-gray-700"></p>
+                                <p id="monthlyValue" class="text-gray-700"></p>
+                                <p id="annualValue" class="text-gray-700"></p>
+                                <p id="roiComparison" class="mt-4 text-green-600 font-semibold"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Enquiry Form Tab Content -->
+        <div id="enquiry-form" class="tab-content">
+          <!-- Main Content -->
+    <main class="py-12">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <!-- Page Title -->
+                <div class="text-center mb-12" data-aos="fade-up" data-aos-duration="800">
+                    <h1 class="text-4xl font-bold mb-4">Speaking & Training Enquiry</h1>
+                    <div class="h-1 w-20 accent-gradient rounded mx-auto mb-6"></div>
+                    <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+                        Complete the form below to request information about our AI education services. 
+                        Our team will respond within 24 hours with customized recommendations.
+                    </p>
+                </div>
+
+                <!-- Form Section -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <!-- Service Options Sidebar -->
+                    <div class="md:col-span-1" data-aos="fade-right" data-aos-duration="800">
+                        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                            <h3 class="text-xl font-bold mb-4 text-emerald-700">Our Services</h3>
+                            <ul class="space-y-3">
+                                <li class="service-option flex items-start p-2 rounded hover:bg-emerald-50">
+                                    <i class="fas fa-chalkboard-teacher text-emerald-500 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-semibold">AI Workshops</h4>
+                                        <p class="text-sm text-gray-600">Hands-on training sessions</p>
+                                    </div>
+                                </li>
+                                <li class="service-option flex items-start p-2 rounded hover:bg-emerald-50">
+                                    <i class="fas fa-microphone text-emerald-500 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-semibold">AI Keynotes</h4>
+                                        <p class="text-sm text-gray-600">Inspiring talks and presentations</p>
+                                    </div>
+                                </li>
+                                <li class="service-option flex items-start p-2 rounded hover:bg-emerald-50">
+                                    <i class="fas fa-graduation-cap text-emerald-500 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-semibold">AI Literacy Courses</h4>
+                                        <p class="text-sm text-gray-600">Comprehensive training programs</p>
+                                    </div>
+                                </li>
+                                <li class="service-option flex items-start p-2 rounded hover:bg-emerald-50">
+                                    <i class="fas fa-chart-line text-emerald-500 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-semibold">AI Strategy Development</h4>
+                                        <p class="text-sm text-gray-600">Custom implementation planning</p>
+                                    </div>
+                                </li>
+                                <li class="service-option flex items-start p-2 rounded hover:bg-emerald-50">
+                                    <i class="fas fa-users-cog text-emerald-500 mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-semibold">Executive AI Coaching</h4>
+                                        <p class="text-sm text-gray-600">One-on-one leadership guidance</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-emerald-50 rounded-lg p-6 border border-emerald-100">
+                            <h3 class="text-lg font-bold mb-3 text-emerald-700">Why Choose Eclatech?</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-emerald-500 mt-1 mr-2"></i>
+                                    <span class="text-sm">Expert-led training from industry professionals</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-emerald-500 mt-1 mr-2"></i>
+                                    <span class="text-sm">Customized content for your specific needs</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-emerald-500 mt-1 mr-2"></i>
+                                    <span class="text-sm">Hands-on learning with practical applications</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-emerald-500 mt-1 mr-2"></i>
+                                    <span class="text-sm">Ongoing support and resource access</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-emerald-500 mt-1 mr-2"></i>
+                                    <span class="text-sm">Ethical AI focus in all programs</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Enquiry Form -->
+                    <div class="md:col-span-2" data-aos="fade-left" data-aos-duration="800">
+                        <form id="enquiryForm" class="form-card bg-white rounded-lg shadow-md p-8">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Contact Information -->
+                                <div class="md:col-span-2">
+                                    <h3 class="text-xl font-bold mb-4 text-emerald-700">Contact Information</h3>
+                                </div>
+                                
+                                <div class="space-y-2">
+                                    <label for="firstName" class="block text-gray-700 font-medium">First Name *</label>
+                                    <input type="text" id="firstName" name="firstName" required class="form-input w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none">
+                                </div>
+                                
+                                <div class="space-y-2">
+                                    <label for="lastName" class="block text-gray-700 font-medium">Last Name *</label>
+                                    <input type="text" id="lastName" name="lastName" required class="form-input w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none">
+                                </div>
+                                
+                                <div class="space-y-2">
+                                    <label for="email" class="block text-gray-700 font-medium">Email Address *</label>
+                                    <input type="email" id="email" name="email" required class="form-input w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none">
+                                </div>
+                                
+                                <div class="space-y-2">
+                                    <label for="phone" class="block text-gray-700 font-medium">Phone Number</label>
+                                    <input type="tel" id="phone" name="phone" class="form-input w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none">
+                                </div>
+                                
+                                <div class="space-y-2 md:col-span-2">
+                                    <label for="organization" class="block text-gray-700 font-medium">Organization/Institution *</label>
+                                    <input type="text" id="organization" name="organization" required class="form-input w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none">
+                                </div>
+                                
+                                <div class="space-y-2 md:col-span-2">
+                                    <label for="jobTitle" class="block text-gray-700 font-medium">Job Title *</label>
+                                    <input type="text" id="jobTitle" name="jobTitle" required class="form-input w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none">
+                                </div>
+                                
+                                <!-- Event Details -->
+                                <div class="md:col-span-2 mt-6">
+                                    <h3 class="text-xl font-bold mb-4 text-emerald-700">Event Details</h3>
+                                </div>
+                                
+                                <div class="space-y-2 md:col-span-2">
+                                    <label class="block text-gray-700 font-medium">Service Type *</label>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+                                        <label class="flex items-center p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer transition-colors">
+                                            <input type="checkbox" name="serviceType" value="workshop" class="form-checkbox text-emerald-500 h-5 w-5 mr-2">
+                                            <span>AI Workshop</span>
+                                        </label>
+                                        <label class="flex items-center p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer transition-colors">
+                                            <input type="checkbox" name="serviceType" value="keynote" class="form-checkbox text-emerald-500 h-5 w-5 mr-2">
+                                            <span>AI Keynote</span>
+                                        </label>
+                                        <label class="flex items-center p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer transition-colors">
+                                            <input type="checkbox" name="serviceType" value="course" class="form-checkbox text-emerald-500 h-5 w-5 mr-2">
+                                            <span>AI Literacy Course</span>
+                                        </label>
+                                        <label class="flex items-center p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer transition-colors">
+                                            <input type="checkbox" name="serviceType" value="strategy" class="form-checkbox text-emerald-500 h-5 w-5 mr-2">
+                                            <span>AI Strategy Development</span>
+                                        </label>
+                                        <label class="flex items-center p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer transition-colors">
+                                            <input type="checkbox" name="serviceType" value="coaching" class="form-checkbox text-emerald-500 h-5 w-5 mr-2">
+                                            <span>Executive AI Coaching</span>
+                                        </label>
+                                        <label class="flex items-center p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer transition-colors">
+                                            <input type="checkbox" name="serviceType" value="custom" class="form-checkbox text-emerald-500 h-5 w-5 mr-2">
+                                            <span>Custom Program</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="space-y-2">
+                                    <label for="audienceType" class="block text-gray-700 font-medium">Target Audience *</label>
+                                    <select id="audienceType" name="audienceType" required class="form-input w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none">
+                                        <option value="" selected disabled>Select audience type</option>
+                                        <option value="higher-ed">Higher Education</option>
+                                        <option value="k12">K-12 Education</option>
+                                        <option value="business">Business/Corporate</option>
+                                        <option value="nonprofit">Non-Profit/Community</option>
+                                        <option value="government">Government</option>
+                                        <option value="mixed">Mixed Audience</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="space-y-2">
+                                    <label for="audienceSize" class="block text-gray-700 font-medium">Estimated Audience Size *</label>
+                                    <select id="audienceSize" name="audienceSize" required class="form-input w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none">
+                                        <option value="" selected disabled>Select audience size</option>
+                                        <option value="1-10">1-10 people</option>
+                                        <option value="11-25">11-25 people</option>
+                                        <option value="26-50">26-50 people</option>
+                                        <option value="51-100">51-100 people</option>
+                                        <option value="101-250">101-250 people</option>
+                                        <option value="250+">250+ people</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="space-y-2">
+                                    <label for="eventFormat" class="block text-gray-700 font-medium">Event Format *</label>
+                                    <select id="eventFormat" name="eventFormat" required class="form-input w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none">
+                                        <option value="" selected disabled>Select format</option>
+                                        <option value="in-person">In-Person</option>
+                                        <option value="virtual">Virtual</option>
+                                        <option value="hybrid">Hybrid</option>
+                                        <option value="undecided">Undecided</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="space-y-2">
+                                    <label for="eventDuration" class="block text-gray-700 font-medium">Event Duration *</label>
+                                    <select id="eventDuration" name="eventDuration" required class="form-input w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none">
+                                        <option value="" selected disabled>Select duration</option>
+                                        <option value="half-day">Half-Day (2-4 hours)</option>
+                                        <option value="full-day">Full-Day (5-8 hours)</option>
+                                        <option value="multi-day">Multi-Day</option>
+                                        <option value="series">Ongoing Series</option>
+                                        <option value="keynote">Keynote (30-90 minutes)</option>
+                                        <option value="custom">Custom Duration</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="space-y-2">
+                                    <label for="preferredDate" class="block text-gray-700 font-medium">Preferred Date (if known)</label>
+                                    <input type="date" id="preferredDate" name="preferredDate" class="form-input w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none">
+                                </div>
+                                
+                                <div class="space-y-2">
+                                    <label for="alternativeDate" class="block text-gray-700 font-medium">Alternative Date (if flexible)</label>
+                                    <input type="date" id="alternativeDate" name="alternativeDate" class="form-input w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none">
+                                </div>
+                                
+                                <div class="space-y-2 md:col-span-2">
+                                    <label for="eventLocation" class="block text-gray-700 font-medium">Event Location (for in-person or hybrid)</label>
+                                    <input type="text" id="eventLocation" name="eventLocation" class="form-input w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none" placeholder="City, State, Country">
+                                </div>
+                                
+                                <!-- Additional Information -->
+                                <div class="md:col-span-2 mt-6">
+                                    <h3 class="text-xl font-bold mb-4 text-emerald-700">Additional Information</h3>
+                                </div>
+                                
+                                <div class="space-y-2 md:col-span-2">
+                                    <label for="objectives" class="block text-gray-700 font-medium">Primary Objectives/Goals *</label>
+                                    <textarea id="objectives" name="objectives" required rows="3" class="form-input w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none" placeholder="What specific outcomes are you hoping to achieve?"></textarea>
+                                </div>
+                                
+                                <div class="space-y-2 md:col-span-2">
+                                    <label for="topicsInterest" class="block text-gray-700 font-medium">Topics of Interest</label>
+                                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 mt-2">
+                                        <label class="flex items-center p-2 text-sm hover:text-emerald-700 cursor-pointer transition-colors">
+                                            <input type="checkbox" name="topics" value="ai-fundamentals" class="form-checkbox text-emerald-500 h-4 w-4 mr-2">
+                                            <span>AI Fundamentals</span>
+                                        </label>
+                                        <label class="flex items-center p-2 text-sm hover:text-emerald-700 cursor-pointer transition-colors">
+                                            <input type="checkbox" name="topics" value="prompt-engineering" class="form-checkbox text-emerald-500 h-4 w-4 mr-2">
+                                            <span>Prompt Engineering</span>
+                                        </label>
+                                        <label class="flex items-center p-2 text-sm hover:text-emerald-700 cursor-pointer transition-colors">
+                                            <input type="checkbox" name="topics" value="generative-ai" class="form-checkbox text-emerald-500 h-4 w-4 mr-2">
+                                            <span>Generative AI</span>
+                                        </label>
+                                        <label class="flex items-center p-2 text-sm hover:text-emerald-700 cursor-pointer transition-colors">
+                                            <input type="checkbox" name="topics" value="ai-ethics" class="form-checkbox text-emerald-500 h-4 w-4 mr-2">
+                                            <span>AI Ethics</span>
+                                        </label>
+                                        <label class="flex items-center p-2 text-sm hover:text-emerald-700 cursor-pointer transition-colors">
+                                            <input type="checkbox" name="topics" value="education-ai" class="form-checkbox text-emerald-500 h-4 w-4 mr-2">
+                                            <span>AI in Education</span>
+                                        </label>
+                                        <label class="flex items-center p-2 text-sm hover:text-emerald-700 cursor-pointer transition-colors">
+                                            <input type="checkbox" name="topics" value="business-ai" class="form-checkbox text-emerald-500 h-4 w-4 mr-2">
+                                            <span>AI for Business</span>
+                                        </label>
+                                        <label class="flex items-center p-2 text-sm hover:text-emerald-700 cursor-pointer transition-colors">
+                                            <input type="checkbox" name="topics" value="data-analysis" class="form-checkbox text-emerald-500 h-4 w-4 mr-2">
+                                            <span>Data Analysis</span>
+                                        </label>
+                                        <label class="flex items-center p-2 text-sm hover:text-emerald-700 cursor-pointer transition-colors">
+                                            <input type="checkbox" name="topics" value="ai-workflows" class="form-checkbox text-emerald-500 h-4 w-4 mr-2">
+                                            <span>AI Workflows</span>
+                                        </label>
+                                        <label class="flex items-center p-2 text-sm hover:text-emerald-700 cursor-pointer transition-colors">
+                                            <input type="checkbox" name="topics" value="ai-implementation" class="form-checkbox text-emerald-500 h-4 w-4 mr-2">
+                                            <span>AI Implementation</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="space-y-2 md:col-span-2">
+                                    <label for="budget" class="block text-gray-700 font-medium">Approximate Budget Range</label>
+                                    <select id="budget" name="budget" class="form-input w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none">
+                                        <option value="" selected disabled>Select budget range</option>
+                                        <option value="under-1000">Under $1,000</option>
+                                        <option value="1000-2500">$1,000 - $2,500</option>
+                                        <option value="2500-5000">$2,500 - $5,000</option>
+                                        <option value="5000-10000">$5,000 - $10,000</option>
+                                        <option value="10000-25000">$10,000 - $25,000</option>
+                                        <option value="25000-plus">$25,000+</option>
+                                        <option value="flexible">Flexible/Not Determined</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="space-y-2 md:col-span-2">
+                                    <label for="additionalInfo" class="block text-gray-700 font-medium">Additional Information</label>
+                                    <textarea id="additionalInfo" name="additionalInfo" rows="4" class="form-input w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none" placeholder="Please share any additional details that would help us better understand your needs."></textarea>
+                                </div>
+                                
+                                <div class="space-y-2 md:col-span-2">
+                                    <label for="hearAbout" class="block text-gray-700 font-medium">How did you hear about us?</label>
+                                    <select id="hearAbout" name="hearAbout" class="form-input w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none">
+                                        <option value="" selected disabled>Select option</option>
+                                        <option value="website">Website</option>
+                                        <option value="social-media">Social Media</option>
+                                        <option value="colleague">Colleague Recommendation</option>
+                                        <option value="conference">Conference/Event</option>
+                                        <option value="search">Search Engine</option>
+                                        <option value="publication">Publication/Article</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- Agreement and Submit -->
+                                <div class="md:col-span-2 mt-6">
+                                    <div class="flex items-start mb-6">
+                                        <input type="checkbox" id="agreement" name="agreement" required class="form-checkbox text-emerald-500 h-5 w-5 mt-1 mr-3">
+                                        <label for="agreement" class="text-gray-700">
+                                            I agree that Eclatech may contact me regarding my enquiry and store my information in accordance with their <a href="#" class="text-emerald-600 hover:underline">Privacy Policy</a>. *
+                                        </label>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn-primary text-white px-8 py-3 rounded-md font-semibold transition pulse">
+                                        Submit Enquiry
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        
+                        <!-- Success Message (hidden by default) -->
+                        <div id="successMessage" class="hidden bg-emerald-50 border border-emerald-200 rounded-lg p-6 text-center mt-6">
+                            <div class="text-5xl text-emerald-500 mb-4">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-emerald-700 mb-2">Thank You for Your Enquiry!</h3>
+                            <p class="text-gray-700 mb-4">
+                                We've received your information and will contact you within 24 hours to discuss your AI education needs.
+                            </p>
+                            <p class="text-sm text-gray-600">
+                                A confirmation email has been sent to your inbox with a summary of your enquiry.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                           
+                <!-- FAQ Section -->
+                <div data-aos="fade-up" data-aos-duration="800">
+                    <h3 class="text-2xl font-bold text-center mb-8 text-emerald-700">Frequently Asked Questions</h3>
+                    <div class="space-y-4 max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6">
+                        <div class="border-b border-gray-200 pb-4">
+                            <h4 class="font-semibold text-lg mb-2">What types of organizations do you work with?</h4>
+                            <p class="text-gray-700">
+                                We work with a diverse range of organizations including higher education institutions, 
+                                K-12 schools, businesses, non-profits, government agencies, and community groups. Our approach 
+                                is customized to the specific needs and context of each organization.
+                            </p>
+                        </div>
+                        
+                        <div class="border-b border-gray-200 pb-4">
+                            <h4 class="font-semibold text-lg mb-2">Do you offer virtual options for your services?</h4>
+                            <p class="text-gray-700">
+                                Yes, all of our services are available in virtual, in-person, or hybrid formats. Our virtual 
+                                workshops and trainings maintain the same interactive, hands-on approach that makes our 
+                                in-person sessions so effective.
+                            </p>
+                        </div>
+                        
+                        <div class="border-b border-gray-200 pb-4">
+                            <h4 class="font-semibold text-lg mb-2">How are your workshops and trainings structured?</h4>
+                            <p class="text-gray-700">
+                                Our programs follow a proven methodology that includes: 1) Introduction to AI fundamentals, 
+                                2) Live demonstrations of relevant applications, 3) Hands-on activities and practice, 
+                                4) Ethical considerations, and 5) Guided exploration and Q&A. This structure ensures 
+                                participants gain both theoretical understanding and practical skills.
+                            </p>
+                        </div>
+                        
+                        <div class="border-b border-gray-200 pb-4">
+                            <h4 class="font-semibold text-lg mb-2">What is your typical timeline from enquiry to delivery?</h4>
+                            <p class="text-gray-700">
+                                After your initial enquiry, we typically schedule a discovery consultation within 1-2 business days. 
+                                Following this conversation, we'll provide a customized proposal within 3-5 business days. The timeline 
+                                from proposal acceptance to delivery varies based on the scope and complexity of your needs, but we can 
+                                typically accommodate events with 2-8 weeks of lead time.
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold text-lg mb-2">Do you provide materials and resources to participants?</h4>
+                            <p class="text-gray-700">
+                                Yes, all participants receive comprehensive resources including session recordings, customized toolkits, 
+                                reference guides, and access to our resource portal for continued learning. These materials are designed 
+                                to support ongoing implementation of the skills and knowledge gained during our programs.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+ 
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                once: true,
+                duration: 1000,
+                easing: 'ease-in-out'
+            });
+            
+            // Form submission handler
+            const form = document.getElementById('enquiryForm');
+            const successMessage = document.getElementById('successMessage');
+            
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Here you would normally add your form validation and AJAX submission
+                    // For demo purposes, we'll just show the success message
+                    
+                    // Simulate form processing
+                    setTimeout(function() {
+                        form.classList.add('hidden');
+                        successMessage.classList.remove('hidden');
+                        
+                        // Scroll to success message
+                        successMessage.scrollIntoView({ behavior: 'smooth' });
+                    }, 1000);
+                });
+            }
+        });
+    </script>
+
+        </div>
+        
+        <!-- Footer - Present on all tabs -->
+        <footer class="py-12 bg-gradient-to-r from-gray-800 to-gray-900 text-white">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-6 md:mb-0">
+                        <p class="opacity-70">AI Learning for All</p>
+                    </div>
+                    
+                    <div class="text-center md:text-right">
+                        <div class="flex space-x-4 mb-4 justify-center md:justify-end">
+                            <a href="https://www.linkedin.com/in/bhavanikola/" target="_blank" class="text-white hover:text-emerald-300 transition transform hover:scale-110">
+                                <i class="fab fa-linkedin text-2xl"></i>
+                            </a>
+                            
+                            <a href="https://www.youtube.com/@BhavaniKola" target="_blank" class="text-white hover:text-emerald-300 transition transform hover:scale-110">
+                                <i class="fab fa-youtube text-2xl"></i>
+                            </a>
+                        </div>
+                        <p class="opacity-70">&copy; 2025 Eclatech Solutions. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS
+            AOS.init({
+                once: true,
+                duration: 1000,
+                easing: 'ease-in-out'
+            });
+            
+            // Initialize methodology progress bar animation
+            setTimeout(function() {
+                const progressBar = document.querySelector('.methodology-progress');
+                if (progressBar) {
+                    progressBar.style.width = '100%';
+                }
+            }, 1000);
+            
+            // Testimonial expand/collapse functionality
+            const testimonialCards = document.querySelectorAll('.testimonial-card');
+            testimonialCards.forEach(card => {
+                const readMoreBtn = card.querySelector('.read-more');
+                if (readMoreBtn) {
+                    readMoreBtn.addEventListener('click', function() {
+                        card.classList.toggle('active');
+                        const icon = this.querySelector('i');
+                        const text = this.querySelector('span');
+                        
+                        if (card.classList.contains('active')) {
+                            icon.classList.add('fa-rotate-180');
+                            text.textContent = 'Read less';
+                        } else {
+                            icon.classList.remove('fa-rotate-180');
+                            text.textContent = 'Read more';
+                        }
+                    });
+                }
+            });
+            
+            // Service card hover effects
+            const serviceCards = document.querySelectorAll('.service-card');
+            serviceCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    const serviceDetails = this.querySelector('.service-details');
+                    if (serviceDetails) {
+                        serviceDetails.classList.add('bg-emerald-50');
+                    }
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    const serviceDetails = this.querySelector('.service-details');
+                    if (serviceDetails) {
+                        serviceDetails.classList.remove('bg-emerald-50');
+                    }
+                });
+            });
+        });
+        
+        // Tab navigation functionality - placed outside DOMContentLoaded to ensure it runs
+        const tabLinks = document.querySelectorAll('.nav-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const tabIndicator = document.querySelector('.tab-indicator');
+            
+        function setTabIndicator(activeTab) {
+            if (!tabIndicator) return;
+            const tabRect = activeTab.getBoundingClientRect();
+            const navRect = activeTab.parentElement.getBoundingClientRect();
+            
+            tabIndicator.style.width = tabRect.width * 0.6 + 'px';
+            tabIndicator.style.left = (tabRect.left - navRect.left) + (tabRect.width * 0.2) + 'px';
+        }
+        
+        tabLinks.forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Debug
+                console.log('Tab clicked:', this.getAttribute('data-tab'));
+                
+                // Remove active class from all tabs and contents
+                tabLinks.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                this.classList.add('active');
+                const tabId = this.getAttribute('data-tab');
+                const tabContent = document.getElementById(tabId);
+                
+                if (tabContent) {
+                    console.log('Activating tab content:', tabId);
+                    tabContent.classList.add('active');
+                } else {
+                    console.error('Tab content not found:', tabId);
+                }
+                
+                // Update tab indicator position
+                setTabIndicator(this);
+                
+                // Update URL hash
+                window.location.hash = tabId;
+                
+                // Scroll to top
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Set initial tab indicator position
+        const activeTab = document.querySelector('.nav-tab.active');
+        if (activeTab) {
+            setTimeout(() => {
+                setTabIndicator(activeTab);
+            }, 100);
+        }
+        
+        // Handle hash navigation
+        function handleHashChange() {
+            const hash = window.location.hash;
+            if (hash) {
+                const tabId = hash.substring(1); // Remove the # character
+                const tabLink = document.querySelector(`.nav-tab[data-tab="${tabId}"]`);
+                if (tabLink) {
+                    tabLink.click();
+                }
+            }
+        }
+        
+        // Initialize hash navigation
+        window.addEventListener('hashchange', handleHashChange);
+        
+        // Check hash on page load
+        setTimeout(() => {
+            handleHashChange();
+        }, 100);
+        
+        // ROI Calculator functionality
+        const calculateROI = document.getElementById('calculateROI');
+        if (calculateROI) {
+            calculateROI.addEventListener('click', function() {
+                var hours = parseFloat(document.getElementById('hoursSaved').value) || 0;
+                var rate = parseFloat(document.getElementById('hourlyRate').value) || 0;
+                var boost = parseFloat(document.getElementById('efficiencyBoost').value) || 0;
+                var investment = parseFloat(document.getElementById('trainingInvestment').value) || 0;
+                var adjustedHours = hours * (1 + boost/100);
+                var weeklyValue = adjustedHours * rate;
+                var monthlyValue = weeklyValue * 4;
+                var annualValue = weeklyValue * 52;
+                var roi = investment > 0 ? ((annualValue / investment) * 100).toFixed(0) : 0;
+                document.getElementById('weeklySavings').textContent = 'Weekly Time Value: $' + weeklyValue.toLocaleString();
+                document.getElementById('monthlyValue').textContent = 'Monthly Value: $' + monthlyValue.toLocaleString();
+                document.getElementById('annualValue').textContent = 'Annual Value: $' + annualValue.toLocaleString();
+                document.getElementById('roiComparison').textContent = 'Estimated ROI vs $' + investment.toLocaleString() + ' investment: ' + roi + '%';
+                document.getElementById('roiResults').classList.remove('hidden');
+            });
+        }
+    </script>
+</body>
+</html>
