@@ -1583,37 +1583,39 @@
  
 
     <!-- JavaScript -->
-   <script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
   document.addEventListener('DOMContentLoaded', () => {
+    // Initialize AOS
     AOS.init({ once: true, duration: 1000, easing: 'ease-in-out' });
 
     const form = document.getElementById('enquiryForm');
     const success = document.getElementById('successMessage');
-    const submitBtn = form.querySelector('button[type="submit"]');
+    const btn = form.querySelector('button[type="submit"]');
 
     form.addEventListener('submit', e => {
       e.preventDefault();
-      submitBtn.disabled = true;
+      btn.disabled = true;
 
+      // Submit to Netlify
       fetch('/', {
         method: 'POST',
         body: new FormData(form),
       })
       .then(res => {
-        if (!res.ok) throw new Error(`Server returned ${res.status}`);
+        if (!res.ok) throw new Error(`Server error: ${res.status}`);
         form.classList.add('hidden');
         success.classList.remove('hidden');
         success.scrollIntoView({ behavior: 'smooth' });
       })
       .catch(err => {
-        console.error('Form error:', err);
-        submitBtn.disabled = false;
+        console.error('Form submission failed:', err);
+        btn.disabled = false;
         alert('Submission failed—please try again.');
       });
     });
   });
 </script>
-
 
         </div>
         
