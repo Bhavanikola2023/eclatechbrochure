@@ -893,7 +893,7 @@
                                 <h3 class="text-xl font-bold text-emerald-700">Business & Organizations</h3>
                             </div>
                             <p class="mb-4 text-gray-700">
-                                Leaders, teams, and professionals seeking competitive advantage through 
+                                Leaders, teams, and professionals seeking a competitive advantage through 
                                 strategic AI implementation and workforce development.
                             </p>
                             <div class="bg-gray-50 p-4 rounded hover:shadow-md transition-shadow duration-300">
@@ -923,7 +923,7 @@
                                 <h3 class="text-xl font-bold text-emerald-700">Non-Profits & Communities</h3>
                             </div>
                             <p class="mb-4 text-gray-700">
-                                Mission-driven organizations and community leaders looking to extend impact 
+                                Mission-driven organizations and community leaders looking to extend their impact 
                                 through resource optimization and enhanced outreach.
                             </p>
                             <div class="bg-gray-50 p-4 rounded hover:shadow-md transition-shadow duration-300">
@@ -1578,7 +1578,7 @@
                         <div>
                             <h4 class="font-semibold text-lg mb-2">Do you provide materials and resources to participants?</h4>
                             <p class="text-gray-700">
-                                Yes, all participants receive comprehensive resources including session recordings, customized toolkits, 
+                                Yes, all participants receive comprehensive resources, including session recordings, customized toolkits, 
                                 reference guides, and access to our resource portal for continued learning. These materials are designed 
                                 to support ongoing implementation of the skills and knowledge gained during our programs.
                             </p>
@@ -1607,8 +1607,9 @@
       }
     }).then(response => {
       if (response.ok) {
-        status.innerHTML = "We have received your enquiry and appreciate your interest in Eclatech Solutions. We will be in touch soon to discuss how we can support your goals.!";
-        form.reset()
+        status.innerHTML = "<b>We have received your enquiry and appreciate your interest in Eclatech Solutions. We will be in touch soon to discuss how we can support your goals.!</b>";
+        status.style.color = "red";
+          form.reset()
       } else {
         response.json().then(data => {
           if (Object.hasOwn(data, 'errors')) {
