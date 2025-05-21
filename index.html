@@ -55,6 +55,8 @@
                 radial-gradient(rgba(13, 148, 136, 0.1) 2px, transparent 2px);
             background-size: 30px 30px;
             background-position: 0 0, 15px 15px;
+            pointer-events: none;  /* Allow clicks to pass through */
+            z-index: -1;         /* Ensure element is behind other content */
         }
         
         .accent-gradient {
@@ -191,6 +193,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            z-index: 20;  /* Ensure the button sits above overlapping elements */
         }
         
         .btn-primary::after {
@@ -377,6 +380,16 @@
             opacity: 0.8;
             margin: 0;
         }
+        
+        .absolute.bottom-0 {
+            pointer-events: none;  /* Allow clicks to pass through */
+            z-index: -1;           /* Send it behind other content */
+        }
+        
+        .absolute.-bottom-10 {
+            pointer-events: none; /* Disable interactions on the gradient overlay */
+            z-index: -1; /* Send it behind the content */
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -429,10 +442,8 @@
         Book Now!
         <span style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); font-size: 12px; white-space: nowrap; color: white;">Click to book</span>
     </a>
-</div>   
-                        </div>
-                        
-                        
+</div>           </div>
+                                               
                     </div>
                     
                     <!-- Animated Tech Elements -->
